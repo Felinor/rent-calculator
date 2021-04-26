@@ -2,11 +2,12 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
-Window {
+ApplicationWindow {
     width: 640
     height: 580
     visible: true
     title: qsTr("Rent Calculator")
+    background: Image { source: "qrc:/backgroundImage.jpg" }
 
     property var summ: parseFloat(text_field_1.text) + parseFloat(text_field_2.text)
                        + parseFloat(text_field_3.text) + parseFloat(text_field_4.text)
@@ -23,28 +24,28 @@ Window {
         horizontalItemAlignment: Qt.AlignRight
         verticalItemAlignment: Qt.AlignVCenter
 
-        Text { text: "T1" }
+        CustomText { text: "T1" }
 
         CustomTextField {
             id: text_field_1
             setPlaceholderText: "T1"
         }
 
-        Text { text: "T2" }
+        CustomText { text: "T2" }
 
         CustomTextField {
             id: text_field_2
             setPlaceholderText: "T2"
         }
 
-        Text { text: "T3" }
+        CustomText { text: "T3"}
 
         CustomTextField {
             id: text_field_3
             setPlaceholderText: "T3"
         }
 
-        Text { text: "SUMM" }
+        CustomText { text: "SUMM" }
 
         CustomTextField {
             id: text_field_4
@@ -52,28 +53,28 @@ Window {
             setPlaceholderText: "SUMM"
         }
 
-        Text { text: "ХВС" }
+        CustomText { text: "ХВС" }
 
         CustomTextField {
             id: text_field_5
             setPlaceholderText: "ХВС"
         }
 
-        Text { text: "ГВС" }
+        CustomText { text: "ГВС" }
 
         CustomTextField {
             id: text_field_6
             setPlaceholderText: "ГВС"
         }
 
-        Text { text: "Водоотвод" }
+        CustomText { text: "Водоотвод" }
 
         CustomTextField {
             id: text_field_7
             setPlaceholderText: "Водоотвод"
         }
 
-        Text { text: "Рента" }
+        CustomText { text: "Рента" }
 
         CustomTextField {
             id: text_field_8
@@ -87,7 +88,7 @@ Window {
         anchors.topMargin: 40
         spacing: 10
 
-        Text { text: "Итог" }
+        CustomText { text: "Итог" }
 
         CustomTextField {
             id: summField
