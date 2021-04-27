@@ -5,7 +5,10 @@ import QtQuick.Controls 2.15
 ApplicationWindow {
     width: 640
     height: 580
+    minimumWidth: 540
+    minimumHeight: 480
     visible: true
+    flags: Qt.Dialog
     title: qsTr("Rent Calculator")
     background: Image { source: "qrc:/backgroundImage.jpg" }
 
@@ -13,8 +16,6 @@ ApplicationWindow {
                        + parseFloat(text_field_3.text) + parseFloat(text_field_4.text)
                        + parseFloat(text_field_5.text) + parseFloat(text_field_6.text)
                        + parseFloat(text_field_7.text) + parseFloat(text_field_8.text)
-
-    //onSummChanged: summField.text = (summField.text !== "NaN" ) ? "Итог" : summ
 
     Grid {
         id: grid
@@ -26,77 +27,47 @@ ApplicationWindow {
 
         CustomText { text: "T1" }
 
-        CustomTextField {
-            id: text_field_1
-            setPlaceholderText: "T1"
-        }
+        CustomTextField { id: text_field_1 }
 
         CustomText { text: "T2" }
 
-        CustomTextField {
-            id: text_field_2
-            setPlaceholderText: "T2"
-        }
+        CustomTextField { id: text_field_2 }
 
         CustomText { text: "T3"}
 
-        CustomTextField {
-            id: text_field_3
-            setPlaceholderText: "T3"
-        }
+        CustomTextField { id: text_field_3 }
 
         CustomText { text: "SUMM" }
 
-        CustomTextField {
-            id: text_field_4
-            maximumLength: 8
-            setPlaceholderText: "SUMM"
-        }
+        CustomTextField { id: text_field_4 }
 
         CustomText { text: "ХВС" }
 
-        CustomTextField {
-            id: text_field_5
-            setPlaceholderText: "ХВС"
-        }
+        CustomTextField { id: text_field_5 }
 
         CustomText { text: "ГВС" }
 
-        CustomTextField {
-            id: text_field_6
-            setPlaceholderText: "ГВС"
-        }
+        CustomTextField { id: text_field_6 }
 
         CustomText { text: "Водоотвод" }
 
-        CustomTextField {
-            id: text_field_7
-            setPlaceholderText: "Водоотвод"
-        }
+        CustomTextField { id: text_field_7 }
 
         CustomText { text: "Рента" }
 
-        CustomTextField {
-            id: text_field_8
-            setPlaceholderText: "Рента"
-        }
-    }
+        CustomTextField { id: text_field_8 }
 
-    Row {
-        anchors.top: grid.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 40
-        spacing: 10
-
-        CustomText { text: "Итог" }
+        CustomText { text: "Итог"; font.pointSize: 14; color: totalField.color }
 
         CustomTextField {
-            id: summField
+            id: totalField
             readOnly: true
             maximumLength: 10
             activeFocusOnPress: false
-            setPlaceholderText: "Итог"
+            placeholderText: "Итог"
             text: summ
+            color: "#AA1945"
+            font.pointSize: 14
         }
     }
 }
