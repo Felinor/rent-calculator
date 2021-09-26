@@ -12,10 +12,16 @@ ApplicationWindow {
     title: qsTr("Rent Calculator")
     background: Image { source: "qrc:/backgroundImage.jpg" }
 
-    property var summ: parseFloat(text_field_1.text) + parseFloat(text_field_2.text)
-                       + parseFloat(text_field_3.text) + parseFloat(text_field_4.text)
-                       + parseFloat(text_field_5.text) + parseFloat(text_field_6.text)
-                       + parseFloat(text_field_7.text) + parseFloat(text_field_8.text)
+    property var summ: (parseFloat(text_field_4.text)
+                        + parseFloat(text_field_5.text)
+                        + parseFloat(text_field_6.text)
+                        + parseFloat(text_field_7.text)
+                        + parseFloat(text_field_8.text))
+                        / parseFloat(text_field_2.text)
+
+    property var personSumm: summ - (parseFloat(text_field_1.text) - (parseFloat(text_field_1.text) / parseFloat(text_field_2.text)))
+
+    property var otherSumm: summ + (parseFloat(text_field_1.text) / parseFloat(text_field_2.text))
 
     Grid {
         id: grid
@@ -23,21 +29,9 @@ ApplicationWindow {
         columns: 2
         spacing: 10
         horizontalItemAlignment: Qt.AlignRight
-        verticalItemAlignment: Qt.AlignVCenter
+        verticalItemAlignment: Qt.AlignVCenter                
 
-        CustomText { text: "T1" }
-
-        CustomTextField { id: text_field_1 }
-
-        CustomText { text: "T2" }
-
-        CustomTextField { id: text_field_2 }
-
-        CustomText { text: "T3"}
-
-        CustomTextField { id: text_field_3 }
-
-        CustomText { text: "SUMM" }
+        CustomText { text: "Электричество" }
 
         CustomTextField { id: text_field_4 }
 
@@ -53,9 +47,30 @@ ApplicationWindow {
 
         CustomTextField { id: text_field_7 }
 
+        CustomText { text: "Бытовые расходы" }
+
+        CustomTextField { id: text_field_1 }
+
         CustomText { text: "Рента" }
 
-        CustomTextField { id: text_field_8 }
+        CustomTextField { id: text_field_8 }        
+
+        CustomText { text: "Кол-во человек" }
+
+        CustomTextField { id: text_field_2 }
+
+        CustomText { text: "Итог личный"; font.pointSize: 14; color: totalField.color }
+
+        CustomTextField {
+            id:  text_field_3
+            readOnly: true
+            maximumLength: 10
+            activeFocusOnPress: false
+            placeholderText: "Итог личный"
+            text: Number.isNaN(personSumm) || personSumm <= 0 || personSumm === Infinity ? 0 : personSumm
+            color: "#AA1945"
+            font.pointSize: 14
+        }
 
         CustomText { text: "Итог"; font.pointSize: 14; color: totalField.color }
 
@@ -65,7 +80,7 @@ ApplicationWindow {
             maximumLength: 10
             activeFocusOnPress: false
             placeholderText: "Итог"
-            text: summ
+            text: Number.isNaN(otherSumm) || otherSumm === Infinity ? 0 : otherSumm
             color: "#AA1945"
             font.pointSize: 14
         }
