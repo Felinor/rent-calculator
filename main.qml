@@ -12,16 +12,17 @@ ApplicationWindow {
     title: qsTr("Rent Calculator")
     background: Image { source: "qrc:/backgroundImage.jpg" }
 
-    property var summ: (parseFloat(text_field_4.text)
-                        + parseFloat(text_field_5.text)
-                        + parseFloat(text_field_6.text)
-                        + parseFloat(text_field_7.text)
-                        + parseFloat(text_field_8.text))
-                        / parseFloat(text_field_2.text)
+    property double sum: (parseFloat(electricity.text)
+                        + parseFloat(coldWater.text)
+                        + parseFloat(hotWater.text)
+                        + parseFloat(canalization.text)
+                        + parseFloat(rent.text))
+                        / parseFloat(amountOfPeople.text)
 
-    property var personSumm: summ - (parseFloat(text_field_1.text) - (parseFloat(text_field_1.text) / parseFloat(text_field_2.text)))
+    property double personalSum: sum - (parseFloat(householdExpenses.text)
+                                        - (parseFloat(householdExpenses.text) / parseFloat(amountOfPeople.text)))
 
-    property var otherSumm: summ + (parseFloat(text_field_1.text) / parseFloat(text_field_2.text))
+    property double theirSum: sum + (parseFloat(householdExpenses.text) / parseFloat(amountOfPeople.text))
 
     Grid {
         id: grid
@@ -33,41 +34,39 @@ ApplicationWindow {
 
         CustomText { text: "Электричество" }
 
-        CustomTextField { id: text_field_4 }
+        CustomTextField { id: electricity }
 
         CustomText { text: "ХВС" }
 
-        CustomTextField { id: text_field_5 }
+        CustomTextField { id: coldWater }
 
         CustomText { text: "ГВС" }
 
-        CustomTextField { id: text_field_6 }
+        CustomTextField { id: hotWater }
 
         CustomText { text: "Водоотвод" }
 
-        CustomTextField { id: text_field_7 }
+        CustomTextField { id: canalization }
 
         CustomText { text: "Бытовые расходы" }
 
-        CustomTextField { id: text_field_1 }
+        CustomTextField { id: householdExpenses }
 
         CustomText { text: "Рента" }
 
-        CustomTextField { id: text_field_8 }        
+        CustomTextField { id: rent }
 
         CustomText { text: "Кол-во человек" }
 
-        CustomTextField { id: text_field_2 }
+        CustomTextField { id: amountOfPeople }
 
         CustomText { text: "Итог личный"; font.pointSize: 14; color: totalField.color }
 
         CustomTextField {
-            id:  text_field_3
             readOnly: true
             maximumLength: 10
             activeFocusOnPress: false
-            placeholderText: "Итог личный"
-            text: Number.isNaN(personSumm) || personSumm <= 0 || personSumm === Infinity ? 0 : personSumm
+            text: Number.isNaN(personalSum) || personalSum <= 0 || personalSum === Infinity ? 0 : personalSum
             color: "#AA1945"
             font.pointSize: 14
         }
@@ -79,8 +78,7 @@ ApplicationWindow {
             readOnly: true
             maximumLength: 10
             activeFocusOnPress: false
-            placeholderText: "Итог"
-            text: Number.isNaN(otherSumm) || otherSumm === Infinity ? 0 : otherSumm
+            text: Number.isNaN(theirSum) || theirSum === Infinity ? 0 : theirSum
             color: "#AA1945"
             font.pointSize: 14
         }
