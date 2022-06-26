@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import Qt.labs.settings 1.0
 
 ApplicationWindow {
     width: 640
@@ -11,6 +12,19 @@ ApplicationWindow {
     flags: Qt.Dialog
     title: qsTr("Rent Calculator")
     background: Image { source: "qrc:/backgroundImage.jpg" }
+
+    Settings {
+        category: "General"
+
+        property alias electricity: electricity.text
+        property alias coldWater: coldWater.text
+        property alias hotWater: hotWater.text
+        property alias canalization: canalization.text
+        property alias rent: rent.text
+        property alias amountOfPeople: amountOfPeople.text
+        property alias householdExpenses: householdExpenses.text
+        property alias totalField: totalField.text
+    }
 
     property double sum: (parseFloat(electricity.text)
                         + parseFloat(coldWater.text)
@@ -32,35 +46,35 @@ ApplicationWindow {
         horizontalItemAlignment: Qt.AlignRight
         verticalItemAlignment: Qt.AlignVCenter                
 
-        CustomText { text: "Электричество" }
+        CustomText { text.text: "Электричество" }
 
         CustomTextField { id: electricity }
 
-        CustomText { text: "ХВС" }
+        CustomText { text.text: "ХВС" }
 
         CustomTextField { id: coldWater }
 
-        CustomText { text: "ГВС" }
+        CustomText { text.text: "ГВС" }
 
         CustomTextField { id: hotWater }
 
-        CustomText { text: "Водоотвод" }
+        CustomText { text.text: "Водоотвод" }
 
         CustomTextField { id: canalization }
 
-        CustomText { text: "Бытовые расходы" }
+        CustomText { text.text: "Бытовые расходы" }
 
         CustomTextField { id: householdExpenses }
 
-        CustomText { text: "Рента" }
+        CustomText { text.text: "Рента" }
 
         CustomTextField { id: rent }
 
-        CustomText { text: "Кол-во человек" }
+        CustomText { text.text: "Кол-во человек" }
 
         CustomTextField { id: amountOfPeople }
 
-        CustomText { text: "Итог личный"; font.pointSize: 14; color: totalField.color }
+        CustomText { text.text: "Итог личный"; text.font.pointSize: 14; text.color: totalField.color }
 
         CustomTextField {
             readOnly: true
@@ -71,7 +85,7 @@ ApplicationWindow {
             font.pointSize: 14
         }
 
-        CustomText { text: "Итог"; font.pointSize: 14; color: totalField.color }
+        CustomText { text.text: "Итог"; text.font.pointSize: 14; text.color: totalField.color }
 
         CustomTextField {
             id: totalField
